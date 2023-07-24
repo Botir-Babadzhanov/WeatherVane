@@ -1,3 +1,11 @@
+//
+//  WeatherManager.swift
+//  WeatherVane
+//
+//  Created by Botir Babadzhanov on 7/21/23.
+//  Copyright © 2023 Botir. All rights reserved.
+//
+
 import UIKit
 
 class WeatherViewController: UIViewController, UITextFieldDelegate {
@@ -6,6 +14,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
+    
+    var weatherManager = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +46,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        // use searchTextField.text to get the weather for that city
+        if let city = searchTextField.text {
+            weatherManager.fetchWeather(cityName: city)
+        }
+        
         searchTextField.text = ""
     }
 }
